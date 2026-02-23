@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-dm-serif: 'DM Serif Text', serif;
+    --font-dm-sans: 'DM Sans', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply font-sans text-charcoal relative;
+    background-color: #F2F5F6; /* Harbor White */
+  }
+
+  /* Subtle organic grain overlay for warmth */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  /* Skip link — visible on focus for keyboard users */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0.5rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    background: #173A4A;
+    color: #F2F5F6;
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 0.5rem;
+    outline: 2px solid #C9A24D;
+    outline-offset: 2px;
+  }
+
+  /* Focus styles — visible outline for keyboard navigation */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #356F8E;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Gold bg + dark text: charcoal on gold = 5.0:1 ✅ */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-gold text-charcoal font-sans font-semibold text-sm tracking-wide uppercase px-7 py-3.5 transition-all duration-200 hover:bg-gold-dark active:scale-95;
+  }
+
+  /* White outline/text for use on dark/blue backgrounds */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border border-white/50 text-white font-sans font-semibold text-sm tracking-wide uppercase px-7 py-3.5 transition-all duration-200 hover:bg-white/10 active:scale-95;
+  }
+
+  /* For use on light backgrounds */
+  .btn-outline-dark {
+    @apply inline-flex items-center gap-2 border border-charcoal text-charcoal font-sans font-semibold text-sm tracking-wide uppercase px-7 py-3.5 transition-all duration-200 hover:bg-charcoal hover:text-white active:scale-95;
+  }
+
+  .btn-white {
+    @apply inline-flex items-center gap-2 bg-white text-charcoal font-sans font-semibold text-sm tracking-wide uppercase px-7 py-3.5 transition-all duration-200 active:scale-95;
+  }
+  .btn-white:hover {
+    background-color: #F2F5F6; /* Harbor White */
+  }
+
+  /* Typography only — callers set the text color per context */
+  .section-label {
+    @apply font-sans text-xs font-semibold tracking-[0.2em] uppercase;
+  }
+
+  .container-hope {
+    @apply max-w-[1200px] mx-auto px-6 lg:px-8;
+  }
+
+  .divider-gold {
+    @apply w-12 h-px bg-gold;
+  }
+
+  /* Reusable grain overlay for sections */
+  .grain-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+}
