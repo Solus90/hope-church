@@ -49,7 +49,7 @@ export default function ByTheNumbers() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="section-label text-center mb-14"
+          className="section-label text-white/60 text-center mb-14"
         >
           By the Numbers
         </motion.p>
@@ -67,7 +67,7 @@ export default function ByTheNumbers() {
               <p className="font-serif text-white mb-2" style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)", lineHeight: 1.1 }}>
                 <AnimatedNumber value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="font-sans text-xs font-semibold tracking-widest uppercase text-gold mb-2">
+              <p className="font-sans text-xs font-semibold tracking-widest uppercase text-white/60 mb-2">
                 {stat.label}
               </p>
               <p className="font-sans text-xs text-white/40">{stat.description}</p>

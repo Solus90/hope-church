@@ -17,7 +17,7 @@ export default function MissionBanner() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="section-label mb-5"
+            className="section-label text-white/60 mb-5"
           >
             Our Mission
           </motion.p>

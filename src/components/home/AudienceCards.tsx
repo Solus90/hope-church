@@ -60,7 +60,7 @@ export default function AudienceCards() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <p className="section-label mb-3">Where do you fit?</p>
+          <p className="section-label text-brand mb-3">Where do you fit?</p>
           <h2 className="font-serif text-charcoal" style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)" }}>
             Everyone has a place here.
           </h2>
@@ -80,11 +80,11 @@ export default function AudienceCards() {
               <div className={`h-1 ${card.accent}`} />
               <div className="p-8 flex flex-col flex-1">
                 {/* Icon */}
-                <div className="w-12 h-12 bg-stone flex items-center justify-center text-gold mb-5">
+                <div className="w-12 h-12 bg-stone flex items-center justify-center text-brand mb-5">
                   {card.icon}
                 </div>
                 {/* Tag */}
-                <p className="section-label mb-2">{card.tag}</p>
+                <p className="section-label text-charcoal/50 mb-2">{card.tag}</p>
                 {/* Title */}
                 <h3 className="font-serif text-charcoal text-2xl mb-3">{card.title}</h3>
                 {/* Desc */}
@@ -94,7 +94,7 @@ export default function AudienceCards() {
                 {/* CTA */}
                 <Link
                   href={card.href}
-                  className="group/link inline-flex items-center gap-2 font-sans text-sm font-semibold text-gold hover:text-gold-dark transition-colors"
+                  className="group/link inline-flex items-center gap-2 font-sans text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
                 >
                   {card.cta}
                   <svg

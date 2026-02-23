@@ -25,7 +25,7 @@ export default function HomeGroups() {
             transition={{ duration: 0.6 }}
             className="lg:sticky lg:top-28"
           >
-            <p className="section-label mb-3">Community</p>
+            <p className="section-label text-brand mb-3">Community</p>
             <div className="divider-gold mb-6" />
             <h2
               className="font-serif text-charcoal mb-5"
@@ -61,10 +61,10 @@ export default function HomeGroups() {
               >
                 <Link
                   href={group.href}
-                  className="group flex items-center justify-between p-5 border border-stone hover:border-gold transition-colors duration-200"
+                  className="group flex items-center justify-between p-5 border border-stone hover:border-brand transition-colors duration-200"
                 >
                   <div>
-                    <p className="font-serif text-charcoal text-lg group-hover:text-gold transition-colors duration-200">
+                    <p className="font-serif text-charcoal text-lg group-hover:text-brand transition-colors duration-200">
                       {group.name}
                     </p>
                     <p className="font-sans text-sm text-charcoal/50 mt-0.5">
@@ -72,7 +72,7 @@ export default function HomeGroups() {
                     </p>
                   </div>
                   <svg
-                    className="w-4 h-4 text-charcoal/30 group-hover:text-gold group-hover:translate-x-1 transition-all duration-200"
+                    className="w-4 h-4 text-charcoal/30 group-hover:text-brand group-hover:translate-x-1 transition-all duration-200"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

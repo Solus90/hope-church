@@ -50,7 +50,7 @@ export default function UpcomingEvents() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="section-label mb-3">What&apos;s Happening</p>
+            <p className="section-label text-white/60 mb-3">What&apos;s Happening</p>
             <h2
               className="font-serif text-white leading-tight"
               style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)" }}
@@ -64,7 +64,7 @@ export default function UpcomingEvents() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Link href="/events" className="btn-outline text-white border-white/30 hover:border-gold hover:text-gold hover:bg-transparent">
+            <Link href="/events" className="btn-outline text-white border-white/30 hover:border-white hover:text-white hover:bg-white/10">
               See All Events
             </Link>
           </motion.div>
@@ -83,7 +83,7 @@ export default function UpcomingEvents() {
               <div className="flex gap-6">
                 {/* Date block */}
                 <div className="shrink-0 text-center w-14">
-                  <p className="font-sans text-[10px] font-semibold tracking-[0.15em] uppercase text-gold">
+                  <p className="font-sans text-[10px] font-semibold tracking-[0.15em] uppercase text-white/50">
                     {event.date.month}
                   </p>
                   <p className="font-serif text-4xl text-white leading-none">
@@ -92,7 +92,7 @@ export default function UpcomingEvents() {
                 </div>
                 {/* Content */}
                 <div className="flex-1 border-l border-white/10 pl-6">
-                  <h3 className="font-serif text-xl text-white mb-1 group-hover:text-gold transition-colors duration-200">
+                  <h3 className="font-serif text-xl text-white mb-1 group-hover:text-white/80 transition-colors duration-200">
                     {event.title}
                   </h3>
                   <p className="font-sans text-xs text-white/50 mb-3">
@@ -103,7 +103,7 @@ export default function UpcomingEvents() {
                   </p>
                   <Link
                     href={event.href}
-                    className="mt-4 inline-flex items-center gap-1.5 font-sans text-xs font-semibold text-gold hover:text-gold-light transition-colors"
+                    className="mt-4 inline-flex items-center gap-1.5 font-sans text-xs font-semibold text-white/70 hover:text-white transition-colors"
                   >
                     Learn more
                     <svg className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

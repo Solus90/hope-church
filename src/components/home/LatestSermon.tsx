@@ -26,7 +26,7 @@ export default function LatestSermon() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="section-label mb-3">Latest Sermon</p>
+            <p className="section-label text-brand mb-3">Latest Sermon</p>
             <div className="divider-gold mb-6" />
 
             <p className="font-sans text-sm text-charcoal/50 mb-2">
@@ -38,7 +38,7 @@ export default function LatestSermon() {
             >
               {latestSermon.title}
             </h2>
-            <p className="font-sans text-sm text-gold font-medium mb-5">
+            <p className="font-sans text-sm text-brand font-medium mb-5">
               {latestSermon.scripture} · {latestSermon.speaker}
             </p>
             <p className="font-sans text-charcoal/70 leading-relaxed mb-8 max-w-[480px]">
