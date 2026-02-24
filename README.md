@@ -1,6 +1,6 @@
 # Hope Presbyterian Church — Website
 
-The official website for Hope Presbyterian Church in Columbus, OH. Built with Next.js and Sanity CMS, designed for clarity, accessibility, and ease of maintenance.
+The official website for Hope Presbyterian Church in Columbus, OH (Evangelical Presbyterian Church). Built with Next.js and Sanity CMS, designed for clarity, accessibility, and ease of maintenance.
 
 ---
 
@@ -140,15 +140,40 @@ Most content is managed in Sanity Studio at `/studio`:
 
 ### Via code (hardcoded sections)
 
-Some content is still in the codebase:
+Some content lives directly in component files:
+
+**Home page sections:**
 
 | Section | File | What to edit |
 |---------|------|--------------|
-| Hero (headline, tagline) | `Hero.tsx` | Headline, tagline, CTAs |
-| Audience cards | `AudienceCards.tsx` | First Timer, Families, OSU cards |
-| Mission banner | `MissionBanner.tsx` | Mission statement |
-| By the numbers | `ByTheNumbers.tsx` | Stats (year founded, etc.) |
-| Connect CTA | `ConnectCTA.tsx` | Plan a Visit, Give, Contact cards |
+| Hero (headline, tagline) | `src/components/home/Hero.tsx` | Headline, tagline, CTAs |
+| Audience cards | `src/components/home/AudienceCards.tsx` | First Timer, Families, OSU cards |
+| Mission banner | `src/components/home/MissionBanner.tsx` | Mission statement |
+| By the numbers | `src/components/home/ByTheNumbers.tsx` | Stats (year founded, etc.) |
+| Connect CTA | `src/components/home/ConnectCTA.tsx` | Plan a Visit, Give, Contact cards |
+
+**Inner pages (full content):**
+
+| Page | Content file |
+|------|-------------|
+| Plan a Visit (`/visit`) | `src/app/visit/VisitContent.tsx` |
+| What to Expect (`/what-to-expect`) | `src/app/what-to-expect/WhatToExpectContent.tsx` |
+| Mission, Vision & Values (`/mission-vision-values`) | `src/app/mission-vision-values/MVVContent.tsx` |
+| Our Story (`/our-story`) | `src/app/our-story/OurStoryContent.tsx` |
+| What We Believe (`/what-we-believe`) | `src/app/what-we-believe/WhatWeBelieveContent.tsx` |
+| Give (`/give`) | `src/app/give/GiveContent.tsx` |
+| Hope Kids & Youth (`/kids`) | `src/app/kids/KidsContent.tsx` |
+
+**Pages still using `ComingSoon` (not yet built):**
+`/about`, `/contact`, `/directions`, `/events`, `/mercy`, `/news`
+
+**Sanity-driven inner pages** (content comes from Studio, component is the display layer):
+
+| Page | Content component | Sanity schema |
+|------|-------------------|---------------|
+| Leadership (`/leadership`) | `LeadershipContent.tsx` | `staffMember` |
+| Sermons (`/sermons`) | `SermonsContent.tsx` | `sermon` |
+| Home Groups (`/groups`) | `GroupsContent.tsx` | `homeGroup` |
 
 ### Navigation and footer
 
@@ -159,11 +184,17 @@ Some content is still in the codebase:
 
 Pages live in `src/app/`. Each page is a folder with a `page.tsx` file.
 
-**Example: editing the About page**
+**Example: editing an existing built page (e.g. Give)**
 
-1. Open `src/app/about/page.tsx`.
-2. Change the `ComingSoon` title or replace it with full page content.
-3. Save the file.
+1. Open `src/app/give/GiveContent.tsx`.
+2. Edit the hardcoded content, copy, or layout.
+3. Save — the dev server will hot-reload.
+
+**Example: building out a placeholder page (e.g. About)**
+
+1. Create `src/app/about/AboutContent.tsx` as a `"use client"` component with your content.
+2. Update `src/app/about/page.tsx` to import and render `AboutContent` instead of `ComingSoon`.
+3. Add a `PageHero` at the top with a label, heading, and subheading.
 
 **Example: adding a new page**
 
@@ -250,7 +281,8 @@ hope/
 │   │   ├── Navbar.tsx
 │   │   ├── Footer.tsx
 │   │   ├── AlertBanner.tsx # Site-wide alert from Sanity
-│   │   ├── ComingSoon.tsx  # Placeholder for in-progress pages
+│   │   ├── PageHero.tsx    # Reusable hero for inner pages
+│   │   ├── ComingSoon.tsx  # Placeholder for pages not yet built
 │   │   └── home/           # Home page sections
 │   ├── sanity/             # Sanity CMS config, schemas, queries
 │   ├── design-tokens.ts    # Brand colors (single source of truth)

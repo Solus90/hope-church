@@ -1,8 +1,9 @@
-import ComingSoon from "@/components/ComingSoon";
+import PageHero from "@/components/PageHero";
 import { pageMetadata } from "@/lib/metadata";
 import { sanityFetch } from "@/sanity/client";
 import { pageHeroQuery } from "@/sanity/queries";
 import type { SanityPageHero } from "@/sanity/types";
+import WhatToExpectContent from "./WhatToExpectContent";
 
 export const metadata = pageMetadata({
   title: "What to Expect",
@@ -12,5 +13,19 @@ export const metadata = pageMetadata({
 
 export default async function Page() {
   const hero = await sanityFetch<SanityPageHero | null>(pageHeroQuery, { page: "what-to-expect" }, null);
-  return <ComingSoon title="What to Expect" heroImageUrl={hero?.imageUrl ?? null} />;
+  return (
+    <>
+      <PageHero
+        label="What to Expect"
+        heading="A Sunday morning at Hope."
+        subheading="Here's everything you need to know before you arrive — from parking to the service itself."
+        imageUrl={hero?.imageUrl ?? null}
+        ctas={[
+          { label: "Plan a Visit", href: "/visit", variant: "primary" },
+          { label: "Get Directions", href: "https://www.google.com/maps/dir/?api=1&destination=2201+Fred+Taylor+Dr,+Columbus,+OH+43210", variant: "outline", external: true },
+        ]}
+      />
+      <WhatToExpectContent heroImageUrl={hero?.imageUrl ?? null} />
+    </>
+  );
 }

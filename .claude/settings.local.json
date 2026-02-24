@@ -38,7 +38,13 @@
       "Bash(src/sanity/config.ts:*)",
       "Bash(/Users/plinley/Developer/hope/src/sanity/queries.ts:*)",
       "Bash(/Users/plinley/Developer/hope/src/sanity/types.ts:*)",
-      "Bash(/Users/plinley/Developer/hope/src/components/SiteShell.tsx:*)"
+      "Bash(/Users/plinley/Developer/hope/src/components/SiteShell.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/visit/VisitContent.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/what-we-believe/WhatWeBelieveContent.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/give/GiveContent.tsx:*)",
+      "Bash(npx tsc:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/kids/KidsContent.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/sermons/SermonsContent.tsx:*)"
     ]
   }
 }
