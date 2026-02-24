@@ -1,6 +1,6 @@
 # Hope Presbyterian Church — Website
 
-The official website for Hope Presbyterian Church in Columbus, OH. Built with Next.js, designed for clarity, accessibility, and ease of maintenance.
+The official website for Hope Presbyterian Church in Columbus, OH. Built with Next.js and Sanity CMS, designed for clarity, accessibility, and ease of maintenance.
 
 ---
 
@@ -9,12 +9,15 @@ The official website for Hope Presbyterian Church in Columbus, OH. Built with Ne
 - [Quick Start](#quick-start)
 - [What You Need](#what-you-need)
 - [Project Overview](#project-overview)
+- [Environment Setup](#environment-setup)
 - [Common Tasks](#common-tasks)
+- [Editing Content](#editing-content)
+- [Content Management (Sanity)](#content-management-sanity)
 - [Project Structure](#project-structure)
 - [Design System](#design-system)
 - [For Developers](#for-developers)
 - [Deployment](#deployment)
-- [Future: Content Management](#future-content-management)
+- [Getting Help](#getting-help)
 
 ---
 
@@ -25,10 +28,13 @@ The official website for Hope Presbyterian Church in Columbus, OH. Built with Ne
 1. Open Terminal (Mac) or Command Prompt (Windows).
 2. Navigate to the project folder: `cd hope` (or wherever the project lives).
 3. Install dependencies (first time only): `npm install`
-4. Start the development server: `npm run dev`
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Create `.env.local` with your Sanity credentials (see [Environment Setup](#environment-setup)).
+5. Start the development server: `npm run dev`
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 The site will auto-refresh when you save changes to files.
+
+**To edit content:** Open [http://localhost:3000/studio](http://localhost:3000/studio) to access Sanity Studio.
 
 ---
 
@@ -36,6 +42,7 @@ The site will auto-refresh when you save changes to files.
 
 - **Node.js** (version 18 or newer) — [Download](https://nodejs.org/)
 - **npm** — Comes with Node.js
+- **Sanity account** — For content management ([sanity.io](https://www.sanity.io/))
 - A code editor (e.g. [VS Code](https://code.visualstudio.com/)) — optional but helpful
 
 ---
@@ -45,12 +52,33 @@ The site will auto-refresh when you save changes to files.
 | Item | Details |
 |------|---------|
 | **Framework** | Next.js 14 (React) |
+| **CMS** | Sanity |
 | **Styling** | Tailwind CSS |
 | **Animations** | Framer Motion |
 | **Language** | TypeScript |
 | **Live URL** | [hopechurchcolumbus.org](https://www.hopechurchcolumbus.org) |
 
-The site is a static, pre-rendered site. Pages are built ahead of time for fast loading and good SEO.
+The site uses Sanity for sermons, events, testimonials, home groups, staff, and more. Pages are pre-rendered at build time for fast loading and good SEO.
+
+---
+
+## Environment Setup
+
+Create a `.env.local` file in the project root with:
+
+```env
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+```
+
+**To get these values:**
+
+1. Go to [sanity.io/manage](https://www.sanity.io/manage)
+2. Create a project (or use an existing one)
+3. Copy the Project ID from the project settings
+4. The dataset is usually `production` (or `development` for testing)
+
+Without these variables, the site will run but content from Sanity will not load. The home page will show empty sections for sermons, events, testimonials, and home groups.
 
 ---
 
@@ -63,6 +91,13 @@ npm run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000).
+
+### Editing content (no code required)
+
+1. Run `npm run dev`
+2. Open [http://localhost:3000/studio](http://localhost:3000/studio)
+3. Log in with your Sanity account
+4. Edit sermons, events, testimonials, home groups, staff, and the alert banner
 
 ### Building for production
 
@@ -89,19 +124,29 @@ npm run lint
 
 ## Editing Content
 
-### Home page sections
+### Via Sanity Studio (recommended)
 
-The home page is built from components in `src/components/home/`:
+Most content is managed in Sanity Studio at `/studio`:
+
+| Content | Where in Studio |
+|--------|-----------------|
+| Sermons | Content → Sermons |
+| Events | Content → Events |
+| Testimonials | Content → Testimonials |
+| Home Groups | Content → Home Groups |
+| Staff & Leadership | Content → Staff & Leadership |
+| Alert Banner | Content → ⚠️ Alert Banner |
+| Page Hero Images | Content → Page Hero Images |
+
+### Via code (hardcoded sections)
+
+Some content is still in the codebase:
 
 | Section | File | What to edit |
 |---------|------|--------------|
-| Hero (top banner) | `Hero.tsx` | Headline, tagline, CTAs |
+| Hero (headline, tagline) | `Hero.tsx` | Headline, tagline, CTAs |
 | Audience cards | `AudienceCards.tsx` | First Timer, Families, OSU cards |
-| Latest sermon | `LatestSermon.tsx` | Sermon title, date, description |
 | Mission banner | `MissionBanner.tsx` | Mission statement |
-| Upcoming events | `UpcomingEvents.tsx` | Event list |
-| Home groups | `HomeGroups.tsx` | Group names and links |
-| Testimonials | `Testimonials.tsx` | Quotes and attributions |
 | By the numbers | `ByTheNumbers.tsx` | Stats (year founded, etc.) |
 | Connect CTA | `ConnectCTA.tsx` | Plan a Visit, Give, Contact cards |
 
@@ -141,6 +186,47 @@ Pages live in `src/app/`. Each page is a folder with a `page.tsx` file.
 
 ---
 
+## Content Management (Sanity)
+
+Sanity Studio is embedded at `/studio`. Content editors can manage:
+
+- **Sermons** — Title, date, series, speaker, scripture, description, video URL, thumbnail
+- **Events** — Title, date, time, location, description, link
+- **Testimonials** — Quote, name, context
+- **Home Groups** — Name, schedule, type, link
+- **Staff & Leadership** — Name, role, bio, image
+- **Alert Banner** — Site-wide banner (enabled/disabled, message, optional link)
+- **Page Hero Images** — Hero images per page (e.g. home)
+
+### Sanity project structure
+
+```
+src/sanity/
+├── config.ts       # Studio config, schema registration
+├── client.ts       # Sanity client, sanityFetch helper
+├── queries.ts      # GROQ queries for fetching content
+├── types.ts        # TypeScript types for Sanity documents
+└── schemas/        # Document schemas
+    ├── sermon.ts
+    ├── event.ts
+    ├── testimonial.ts
+    ├── homeGroup.ts
+    ├── staffMember.ts
+    ├── alertBanner.ts
+    └── pageHero.ts
+```
+
+### Adding a new content type
+
+1. Create a schema in `src/sanity/schemas/`
+2. Register it in `src/sanity/schemas/index.ts`
+3. Add it to the Studio structure in `src/sanity/config.ts`
+4. Create a GROQ query in `src/sanity/queries.ts`
+5. Add the TypeScript type in `src/sanity/types.ts`
+6. Fetch and render in your page or component
+
+---
+
 ## Project Structure
 
 ```
@@ -150,19 +236,23 @@ hope/
 │   └── hope-kids-slide-graphic-2019.png
 ├── src/
 │   ├── app/                # Pages and app-wide setup
-│   │   ├── layout.tsx      # Root layout (navbar, footer, fonts)
-│   │   ├── page.tsx        # Home page
+│   │   ├── layout.tsx      # Root layout (fonts, metadata, SiteShell)
+│   │   ├── page.tsx        # Home page (fetches from Sanity)
 │   │   ├── globals.css     # Global styles
 │   │   ├── not-found.tsx   # 404 page
 │   │   ├── sitemap.ts      # SEO sitemap
 │   │   ├── robots.ts       # SEO robots.txt
+│   │   ├── studio/         # Sanity Studio (embedded at /studio)
 │   │   └── [page]/         # One folder per route
 │   │       └── page.tsx
 │   ├── components/         # Reusable UI components
+│   │   ├── SiteShell.tsx   # Layout wrapper (Navbar, Footer, AlertBanner)
 │   │   ├── Navbar.tsx
 │   │   ├── Footer.tsx
+│   │   ├── AlertBanner.tsx # Site-wide alert from Sanity
 │   │   ├── ComingSoon.tsx  # Placeholder for in-progress pages
 │   │   └── home/           # Home page sections
+│   ├── sanity/             # Sanity CMS config, schemas, queries
 │   ├── design-tokens.ts    # Brand colors (single source of truth)
 │   └── lib/
 │       └── metadata.ts     # SEO metadata helper
@@ -217,6 +307,8 @@ Defined in `src/app/globals.css`:
 ### Tech stack
 
 - **Next.js 14** — App Router, React Server Components
+- **Sanity** — Headless CMS (sermons, events, testimonials, etc.)
+- **next-sanity** — Sanity client for Next.js
 - **TypeScript** — Type safety
 - **Tailwind CSS** — Utility-first styling
 - **Framer Motion** — Animations (with `reducedMotion="user"` support)
@@ -230,10 +322,18 @@ Defined in `src/app/globals.css`:
 | `src/design-tokens.ts` | Brand colors and semantic tokens |
 | `src/app/layout.tsx` | Root layout, metadata, structured data |
 | `src/lib/metadata.ts` | Per-page SEO metadata helper |
+| `src/sanity/config.ts` | Sanity Studio configuration |
+| `src/sanity/client.ts` | Sanity client and `sanityFetch` helper |
+| `src/sanity/queries.ts` | GROQ queries |
 
-### Environment
+### Environment variables
 
-No environment variables are required for basic development. For production, ensure the correct `baseUrl` is used in:
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Yes | Sanity project ID |
+| `NEXT_PUBLIC_SANITY_DATASET` | No (default: `production`) | Sanity dataset name |
+
+For production, also ensure the correct `baseUrl` is used in:
 
 - `src/app/layout.tsx` (structured data)
 - `src/app/sitemap.ts`
@@ -255,37 +355,28 @@ No environment variables are required for basic development. For production, ens
 - Sitemap at `/sitemap.xml`
 - `robots.txt` at `/robots.txt`
 - Church schema (JSON-LD) in the layout
+- Sanity Studio excluded from search (`robots: { index: false }`)
 
 ---
 
 ## Deployment
 
-The site is a static Next.js app. It can be deployed to:
+The site can be deployed to:
 
-- **Vercel** (recommended) — Connect the repo and deploy automatically
+- **Vercel** (recommended) — Connect the repo, add env vars, deploy automatically
 - **Netlify** — Similar setup
-- **Any static host** — Run `npm run build` and serve the `.next` output (or use `next export` if configured)
+- **Other hosts** — Run `npm run build` and serve with `npm run start`
 
 **Build command:** `npm run build`  
-**Output directory:** `.next` (or as configured)
+**Start command:** `npm run start`
 
----
-
-## Future: Content Management
-
-The codebase is prepared for **Sanity CMS** integration. Comments in `LatestSermon.tsx` and `Testimonials.tsx` indicate where content would be fetched from Sanity instead of hardcoded data.
-
-Planned content types:
-
-- Sermons (title, date, video URL, series, speaker)
-- Testimonials (quote, name, context)
-- Events
-- Home groups
+Set `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` in your deployment platform's environment variables.
 
 ---
 
 ## Getting Help
 
 - **Next.js docs:** [nextjs.org/docs](https://nextjs.org/docs)
+- **Sanity docs:** [sanity.io/docs](https://www.sanity.io/docs)
 - **Tailwind CSS:** [tailwindcss.com/docs](https://tailwindcss.com/docs)
 - **Project questions:** Contact the development team or church operations.
