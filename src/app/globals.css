@@ -77,9 +77,8 @@
 }
 
 @layer components {
-  /* Gold bg + dark text: charcoal on gold = 5.0:1 ✅ */
   .btn-primary {
-    @apply inline-flex items-center gap-2 bg-gold text-charcoal font-sans font-semibold text-sm tracking-wide uppercase px-7 py-3.5 transition-all duration-200 hover:bg-gold-dark active:scale-95;
+    @apply inline-flex items-center gap-2 bg-gold text-[#173A4A] font-sans font-semibold text-sm tracking-wide uppercase px-7 py-3.5 transition-all duration-200 hover:bg-gold-dark active:scale-95;
   }
 
   /* White outline/text for use on dark/blue backgrounds */

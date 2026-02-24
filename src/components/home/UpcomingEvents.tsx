@@ -65,7 +65,7 @@ export default function UpcomingEvents({ events }: UpcomingEventsProps) {
                 <div className="flex gap-6">
                   {/* Date block */}
                   <div className="shrink-0 text-center w-14">
-                    <p className="font-sans text-[10px] font-semibold tracking-[0.15em] uppercase text-white/50">
+                    <p className="font-sans text-[10px] font-semibold tracking-[0.15em] uppercase text-white/65">
                       {month}
                     </p>
                     <p className="font-serif text-4xl text-white leading-none">
@@ -78,7 +78,7 @@ export default function UpcomingEvents({ events }: UpcomingEventsProps) {
                       {event.title}
                     </h3>
                     {meta && (
-                      <p className="font-sans text-xs text-white/50 mb-3">{meta}</p>
+                      <p className="font-sans text-xs text-white/65 mb-3">{meta}</p>
                     )}
                     {event.description && (
                       <p className="font-sans text-sm text-white/60 leading-relaxed">

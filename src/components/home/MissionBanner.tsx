@@ -17,7 +17,7 @@ export default function MissionBanner() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="section-label text-white/60 mb-5"
+            className="section-label text-white/85 mb-5"
           >
             Our Mission
           </motion.p>
@@ -40,7 +40,7 @@ export default function MissionBanner() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="font-sans text-white/65 leading-relaxed text-lg mb-10 max-w-lg"
+            className="font-sans text-white/90 leading-relaxed text-lg mb-10 max-w-lg"
           >
             God made it. We broke it. Jesus fixes it. That&apos;s the story — and
             it&apos;s the reason we gather every Sunday, open our homes every week,

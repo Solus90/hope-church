@@ -37,7 +37,7 @@ const nav = [
   { label: "Give", href: "/give" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ hasBanner = false }: { hasBanner?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -70,11 +70,12 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
           scrolled || mobileOpen
             ? "bg-brand shadow-lg"
             : "bg-transparent"
         }`}
+        style={{ top: hasBanner ? "44px" : "0px" }}
       >
         <div className="container-hope flex items-center justify-between h-[108px]">
           {/* Logo */}
@@ -192,7 +193,8 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-brand pt-[108px] overflow-y-auto lg:hidden"
+            className="fixed inset-0 z-40 bg-brand overflow-y-auto lg:hidden"
+            style={{ paddingTop: hasBanner ? "152px" : "108px" }}
           >
             <nav className="container-hope py-8">
               {nav.map((item) => (

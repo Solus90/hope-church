@@ -33,7 +33,12 @@
       "Bash(/Users/plinley/Developer/hope/src/app/sermons/page.tsx:*)",
       "Bash(/Users/plinley/Developer/hope/src/app/visit/page.tsx:*)",
       "Bash(/Users/plinley/Developer/hope/src/app/what-to-expect/page.tsx:*)",
-      "Bash(/Users/plinley/Developer/hope/src/app/what-we-believe/page.tsx:*)"
+      "Bash(/Users/plinley/Developer/hope/src/app/what-we-believe/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/sanity/schemas/index.ts:*)",
+      "Bash(src/sanity/config.ts:*)",
+      "Bash(/Users/plinley/Developer/hope/src/sanity/queries.ts:*)",
+      "Bash(/Users/plinley/Developer/hope/src/sanity/types.ts:*)",
+      "Bash(/Users/plinley/Developer/hope/src/components/SiteShell.tsx:*)"
     ]
   }
 }

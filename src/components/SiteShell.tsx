@@ -3,12 +3,15 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AlertBanner from "@/components/AlertBanner";
+import type { SanityAlertBanner } from "@/sanity/types";
 
-export default function SiteShell({
-  children,
-}: {
+interface Props {
   children: React.ReactNode;
-}) {
+  alertBanner?: SanityAlertBanner | null;
+}
+
+export default function SiteShell({ children, alertBanner }: Props) {
   const pathname = usePathname();
   const isStudio = pathname?.startsWith("/studio");
 
@@ -17,10 +20,17 @@ export default function SiteShell({
     return <>{children}</>;
   }
 
+  const hasBanner = !!(alertBanner?.enabled && alertBanner.message);
+
   return (
     <>
-      <Navbar />
-      <main id="main-content" tabIndex={-1}>
+      <AlertBanner banner={alertBanner ?? null} />
+      <Navbar hasBanner={hasBanner} />
+      <main
+        id="main-content"
+        tabIndex={-1}
+        style={hasBanner ? { paddingTop: "44px" } : undefined}
+      >
         {children}
       </main>
       <Footer />

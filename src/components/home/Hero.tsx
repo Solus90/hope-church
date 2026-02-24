@@ -39,7 +39,7 @@ export default function Hero({ heroImageUrl }: Props) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="section-label text-white/60 mb-6"
+            className="section-label text-white/85 mb-6"
           >
             Hope Presbyterian Church · Columbus, OH
           </motion.p>
@@ -62,7 +62,7 @@ export default function Hero({ heroImageUrl }: Props) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
-            className="font-sans text-white/75 text-lg leading-relaxed max-w-lg mb-10"
+            className="font-sans text-white/90 text-lg leading-relaxed max-w-lg mb-10"
           >
             We won&apos;t do this perfectly — but we hope you experience a small
             glimpse of Jesus&apos; perfect love for you through us.
@@ -93,7 +93,7 @@ export default function Hero({ heroImageUrl }: Props) {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="mt-16 flex flex-wrap gap-x-10 gap-y-3"
           >
-              <p className="font-sans text-sm text-white/60 flex items-center gap-2">
+              <p className="font-sans text-sm text-white/85 flex items-center gap-2">
               <span>🕙</span>
               Sundays at 10:00 AM
             </p>
@@ -101,7 +101,7 @@ export default function Hero({ heroImageUrl }: Props) {
               href="https://maps.google.com/?q=2201+Fred+Taylor+Dr,+Columbus,+OH"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-sans text-sm text-white/60 flex items-center gap-2 hover:text-white transition-colors duration-200"
+              className="font-sans text-sm text-white/85 flex items-center gap-2 hover:text-white transition-colors duration-200"
             >
               <span>📍</span>
               2201 Fred Taylor Dr, Columbus

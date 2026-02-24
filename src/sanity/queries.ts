@@ -119,3 +119,15 @@ export const allEventsQuery = groq`
     featuredOnHome
   }
 `;
+
+// ─── Alert Banner ────────────────────────────────────────────────────────────
+
+// Singleton document — always fetched by fixed ID.
+export const alertBannerQuery = groq`
+  *[_type == "alertBanner" && _id == "alertBanner"][0] {
+    enabled,
+    message,
+    linkText,
+    linkUrl
+  }
+`;

@@ -22,12 +22,12 @@ export default function ComingSoon({ title, heroImageUrl }: Props) {
       <div className="grain-overlay" aria-hidden="true" />
 
       <div className="container-hope relative z-10 text-center max-w-xl py-24">
-        <p className="section-label text-white/60 mb-4">Under Construction</p>
+        <p className="section-label text-white/85 mb-4">Under Construction</p>
         <div className="w-10 h-px bg-gold mx-auto mb-6" aria-hidden="true" />
         <h1 className="font-serif text-white mb-5" style={{ fontSize: "clamp(2rem, 5vw, 3.25rem)" }}>
           {title}
         </h1>
-        <p className="font-sans text-white/65 leading-relaxed mb-10">
+        <p className="font-sans text-white/90 leading-relaxed mb-10">
           This page is being built. Check back soon, or head back to the
           homepage to explore Hope Presbyterian Church.
         </p>

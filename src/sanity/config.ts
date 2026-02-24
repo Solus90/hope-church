@@ -46,6 +46,16 @@ export default defineConfig({
               .child(S.documentTypeList("staffMember").title("Staff & Leadership")),
             S.divider(),
             S.listItem()
+              .title("⚠️ Alert Banner")
+              .schemaType("alertBanner")
+              .child(
+                S.editor()
+                  .id("alertBanner")
+                  .schemaType("alertBanner")
+                  .documentId("alertBanner")
+              ),
+            S.divider(),
+            S.listItem()
               .title("Page Hero Images")
               .schemaType("pageHero")
               .child(S.documentTypeList("pageHero").title("Page Hero Images")),

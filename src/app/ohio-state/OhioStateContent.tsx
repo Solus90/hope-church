@@ -247,7 +247,7 @@ export default function OhioStateContent({ heroImageUrl }: Props) {
                   <div className="w-12 h-12 bg-stone flex items-center justify-center text-brand mb-5">
                     {card.icon}
                   </div>
-                  <p className="section-label text-charcoal/50 mb-2">{card.tag}</p>
+                  <p className="section-label text-text-secondary mb-2">{card.tag}</p>
                   <h3 className="font-serif text-charcoal text-2xl mb-3">{card.title}</h3>
                   <p className="font-sans text-sm text-charcoal/70 leading-relaxed mb-8 flex-1">
                     {card.desc}
@@ -290,7 +290,7 @@ export default function OhioStateContent({ heroImageUrl }: Props) {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="section-label text-white/60 mb-5"
+              className="section-label text-white/85 mb-5"
             >
               Our Partnership
             </motion.p>
@@ -313,7 +313,7 @@ export default function OhioStateContent({ heroImageUrl }: Props) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="font-sans text-white/70 leading-relaxed text-lg mb-5 max-w-[560px]"
+              className="font-sans text-white/90 leading-relaxed text-lg mb-5 max-w-[560px]"
             >
               Hope is a church partner with the ministry of Cru at The Ohio State University. Cru is a Christian organization with a presence at OSU since the late 1950s — their mission is to help everyone at OSU know someone who truly follows Jesus.
             </motion.p>
@@ -323,7 +323,7 @@ export default function OhioStateContent({ heroImageUrl }: Props) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.25 }}
-              className="font-sans text-white/70 leading-relaxed text-lg mb-10 max-w-[560px]"
+              className="font-sans text-white/90 leading-relaxed text-lg mb-10 max-w-[560px]"
             >
               Many of our leaders are Cru alumni. We don't duplicate what they do — we extend it. Cru reaches the campus; Hope offers a local church community where those roots can grow for the long haul.
             </motion.p>
@@ -436,8 +436,8 @@ export default function OhioStateContent({ heroImageUrl }: Props) {
                       </svg>
                     </div>
                     <p className="font-serif text-white text-2xl mb-1">4-H Center</p>
-                    <p className="font-sans text-white/60 text-sm mb-1">2201 Fred Taylor Dr</p>
-                    <p className="font-sans text-white/40 text-xs">Columbus, OH 43210</p>
+                    <p className="font-sans text-white/85 text-sm mb-1">2201 Fred Taylor Dr</p>
+                    <p className="font-sans text-white/75 text-xs">Columbus, OH 43210</p>
                   </div>
                 </div>
               </div>

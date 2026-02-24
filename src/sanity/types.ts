@@ -58,3 +58,10 @@ export interface SanityEvent {
   registrationUrl?: string;
   featuredOnHome?: boolean;
 }
+
+export interface SanityAlertBanner {
+  enabled: boolean;
+  message?: string;
+  linkText?: string;
+  linkUrl?: string;
+}

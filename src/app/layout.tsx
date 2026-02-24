@@ -3,6 +3,9 @@ import { DM_Serif_Text, DM_Sans } from "next/font/google";
 import "./globals.css";
 import SiteShell from "@/components/SiteShell";
 import MotionProvider from "@/components/MotionProvider";
+import { sanityFetch } from "@/sanity/client";
+import { alertBannerQuery } from "@/sanity/queries";
+import type { SanityAlertBanner } from "@/sanity/types";
 
 const dmSerif = DM_Serif_Text({
   weight: ["400"],
@@ -52,11 +55,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const alertBanner = await sanityFetch<SanityAlertBanner | null>(
+    alertBannerQuery,
+    {},
+    null
+  );
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Church",
@@ -99,7 +108,7 @@ export default function RootLayout({
           >
             Skip to main content
           </a>
-          <SiteShell>{children}</SiteShell>
+          <SiteShell alertBanner={alertBanner}>{children}</SiteShell>
         </MotionProvider>
       </body>
     </html>

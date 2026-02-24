@@ -4,5 +4,6 @@ import homeGroup from "./homeGroup";
 import staffMember from "./staffMember";
 import pageHero from "./pageHero";
 import event from "./event";
+import alertBanner from "./alertBanner";
 
-export const schemaTypes = [sermon, testimonial, homeGroup, staffMember, pageHero, event];
+export const schemaTypes = [sermon, testimonial, homeGroup, staffMember, pageHero, event, alertBanner];

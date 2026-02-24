@@ -70,7 +70,7 @@ export default function ByTheNumbers() {
               <p className="font-sans text-xs font-semibold tracking-widest uppercase text-white/60 mb-2">
                 {stat.label}
               </p>
-              <p className="font-sans text-xs text-white/40">{stat.description}</p>
+              <p className="font-sans text-xs text-white/60">{stat.description}</p>
             </motion.div>
           ))}
         </div>

@@ -84,7 +84,7 @@ export default function AudienceCards() {
                   {card.icon}
                 </div>
                 {/* Tag */}
-                <p className="section-label text-charcoal/50 mb-2">{card.tag}</p>
+                <p className="section-label text-text-secondary mb-2">{card.tag}</p>
                 {/* Title */}
                 <h3 className="font-serif text-charcoal text-2xl mb-3">{card.title}</h3>
                 {/* Desc */}
