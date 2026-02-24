@@ -15,7 +15,25 @@
       "Bash(node -e:*)",
       "Bash(convert:*)",
       "Bash(sips:*)",
-      "Bash(xxd:*)"
+      "Bash(xxd:*)",
+      "Bash(test:*)",
+      "Bash(npm view:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/about/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/contact/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/directions/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/events/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/give/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/groups/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/kids/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/leadership/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/mercy/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/mission-vision-values/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/news/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/our-story/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/sermons/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/visit/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/what-to-expect/page.tsx:*)",
+      "Bash(/Users/plinley/Developer/hope/src/app/what-we-believe/page.tsx:*)"
     ]
   }
 }

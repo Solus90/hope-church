@@ -46,20 +46,24 @@ const serviceDetails = [
   { label: "Phone", value: "614-526-4194" },
 ];
 
-export default function OhioStateContent() {
+interface Props {
+  heroImageUrl?: string | null;
+}
+
+export default function OhioStateContent({ heroImageUrl }: Props) {
   return (
     <>
       {/* ─── HERO ─── */}
-      <section className="relative min-h-[80vh] flex items-end overflow-hidden bg-brand-dark pt-[72px]">
-        {/* Campus background */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1800&q=80')",
-          }}
-          aria-hidden="true"
-        />
+      <section className="relative min-h-[80vh] flex items-end overflow-hidden bg-brand-dark pt-[108px]">
+        {/* Background image — only rendered when an image is set in Sanity */}
+        {heroImageUrl && (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url('${heroImageUrl}')` }}
+            aria-hidden="true"
+          />
+        )}
+        {/* Brand-dark overlay — always present; doubles as solid bg when no image */}
         <div className="absolute inset-0 bg-brand-dark/75" aria-hidden="true" />
         {/* Bottom fade into next section */}
         <div
@@ -69,7 +73,7 @@ export default function OhioStateContent() {
         />
         {/* OSU Scarlet top rule — just below the navbar */}
         <div
-          className="absolute top-[72px] left-0 right-0 h-[3px]"
+          className="absolute top-[108px] left-0 right-0 h-[3px]"
           style={{ backgroundColor: OSU_SCARLET }}
           aria-hidden="true"
         />

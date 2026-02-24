@@ -1,5 +1,8 @@
 import { pageMetadata } from "@/lib/metadata";
 import OhioStateContent from "./OhioStateContent";
+import { sanityFetch } from "@/sanity/client";
+import { pageHeroQuery } from "@/sanity/queries";
+import type { SanityPageHero } from "@/sanity/types";
 
 export const metadata = pageMetadata({
   title: "Hope at Ohio State",
@@ -8,6 +11,7 @@ export const metadata = pageMetadata({
   path: "/ohio-state",
 });
 
-export default function Page() {
-  return <OhioStateContent />;
+export default async function Page() {
+  const hero = await sanityFetch<SanityPageHero | null>(pageHeroQuery, { page: "ohio-state" }, null);
+  return <OhioStateContent heroImageUrl={hero?.imageUrl ?? null} />;
 }

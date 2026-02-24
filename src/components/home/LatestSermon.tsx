@@ -2,19 +2,31 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import type { SanitySermon } from "@/sanity/types";
 
-// In production this would be fetched from Sanity CMS
-const latestSermon = {
-  date: "February 22, 2026",
-  series: "The Gospel of Luke",
-  title: "The Blank Check of Discipleship",
-  scripture: "Luke 14:25–35",
-  speaker: "Joe Haack",
-  description:
-    "What does it actually cost to follow Jesus? In Luke 14, Jesus gives some of his most challenging words about the conditions of discipleship — and the surprising freedom found on the other side.",
-};
+// Format ISO date "2026-02-22" → "February 22, 2026" without timezone shift
+function formatSermonDate(isoDate: string): string {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
 
-export default function LatestSermon() {
+interface Props {
+  sermon: SanitySermon | null;
+}
+
+export default function LatestSermon({ sermon }: Props) {
+  if (!sermon) return null;
+
+  const formattedDate = formatSermonDate(sermon.date);
+  const videoHref = sermon.videoUrl ?? "/sermons";
+  const thumbnailStyle = sermon.thumbnailUrl
+    ? { backgroundImage: `url('${sermon.thumbnailUrl}')` }
+    : { backgroundImage: "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80')" };
+
   return (
     <section className="py-24 bg-harbor">
       <div className="container-hope">
@@ -30,23 +42,27 @@ export default function LatestSermon() {
             <div className="divider-gold mb-6" />
 
             <p className="font-sans text-sm text-charcoal/50 mb-2">
-              {latestSermon.series} · {latestSermon.date}
+              {sermon.series && `${sermon.series} · `}{formattedDate}
             </p>
             <h2
               className="font-serif text-charcoal mb-4 leading-tight"
               style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)" }}
             >
-              {latestSermon.title}
+              {sermon.title}
             </h2>
-            <p className="font-sans text-sm text-brand font-medium mb-5">
-              {latestSermon.scripture} · {latestSermon.speaker}
-            </p>
-            <p className="font-sans text-charcoal/70 leading-relaxed mb-8 max-w-[480px]">
-              {latestSermon.description}
-            </p>
+            {(sermon.scripture || sermon.speaker) && (
+              <p className="font-sans text-sm text-brand font-medium mb-5">
+                {[sermon.scripture, sermon.speaker].filter(Boolean).join(" · ")}
+              </p>
+            )}
+            {sermon.description && (
+              <p className="font-sans text-charcoal/70 leading-relaxed mb-8 max-w-[480px]">
+                {sermon.description}
+              </p>
+            )}
 
             <div className="flex flex-wrap gap-4">
-              <Link href="/sermons" className="btn-primary">
+              <Link href={videoHref} className="btn-primary">
                 Watch Now
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
@@ -58,7 +74,7 @@ export default function LatestSermon() {
             </div>
           </motion.div>
 
-          {/* Sermon card / video placeholder */}
+          {/* Sermon card / video thumbnail */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -66,18 +82,14 @@ export default function LatestSermon() {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            {/* Video thumbnail — wrapped in Link for keyboard/screen reader access */}
             <Link
-              href="/sermons"
+              href={videoHref}
               className="relative aspect-video bg-brand overflow-hidden group block"
-              aria-label={`Watch ${latestSermon.title} — ${latestSermon.series}`}
+              aria-label={`Watch ${sermon.title}${sermon.series ? ` — ${sermon.series}` : ""}`}
             >
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-50 transition-opacity duration-300"
-                style={{
-                  backgroundImage:
-                    "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80')",
-                }}
+                style={thumbnailStyle}
                 aria-hidden
               />
               {/* Play button */}
@@ -88,14 +100,16 @@ export default function LatestSermon() {
                   </svg>
                 </span>
               </div>
-              {/* Series tag */}
+              {/* Series / title tag */}
               <div className="absolute bottom-4 left-4 right-4">
                 <div className="bg-brand/80 backdrop-blur-sm p-4">
-                  <p className="font-sans text-xs text-gold uppercase tracking-widest mb-1">
-                    {latestSermon.series}
-                  </p>
+                  {sermon.series && (
+                    <p className="font-sans text-xs text-gold uppercase tracking-widest mb-1">
+                      {sermon.series}
+                    </p>
+                  )}
                   <p className="font-serif text-white text-lg leading-tight">
-                    {latestSermon.title}
+                    {sermon.title}
                   </p>
                 </div>
               </div>

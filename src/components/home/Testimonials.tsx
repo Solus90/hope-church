@@ -2,44 +2,31 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import type { SanityTestimonial } from "@/sanity/types";
 
-// In production these would be managed in Sanity CMS
-const testimonials = [
-  {
-    quote:
-      "Hope is the first church where I've genuinely felt like an outsider could belong. We showed up not knowing anyone, and left with dinner plans.",
-    name: "Marcus & Priya",
-    context: "Joined in 2023",
-  },
-  {
-    quote:
-      "As an OSU grad student, I expected to age out of this place quickly. Instead I found a community of people who take both faith and real life seriously.",
-    name: "Dr. Sarah K.",
-    context: "Graduate Student, Ohio State",
-  },
-  {
-    quote:
-      "Our kids ask every week if it's Sunday yet. Hope Kids is that good. The care they take with my children's faith is something I didn't know to look for.",
-    name: "The Hendersons",
-    context: "Family of four",
-  },
-  {
-    quote:
-      "I grew up in the church and walked away. Hope was the first place that felt honest enough to walk back toward. The sermons don't flinch from hard things.",
-    name: "Thomas R.",
-    context: "Columbus, OH",
-  },
-];
+interface Props {
+  testimonials: SanityTestimonial[];
+}
 
-export default function Testimonials() {
+export default function Testimonials({ testimonials }: Props) {
   const [active, setActive] = useState(0);
 
+  // Reset active index if testimonials change
   useEffect(() => {
+    setActive(0);
+  }, [testimonials]);
+
+  useEffect(() => {
+    if (testimonials.length <= 1) return;
     const timer = setInterval(() => {
       setActive((prev) => (prev + 1) % testimonials.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, []);
+  }, [testimonials.length]);
+
+  if (testimonials.length === 0) return null;
+
+  const current = testimonials[active];
 
   return (
     <section className="py-24 bg-sandstone">
@@ -56,10 +43,14 @@ export default function Testimonials() {
           </motion.p>
 
           {/* Quote area */}
-          <div className="relative min-h-[220px] flex items-center justify-center" aria-live="polite" aria-atomic="true">
+          <div
+            className="relative min-h-[220px] flex items-center justify-center"
+            aria-live="polite"
+            aria-atomic="true"
+          >
             <AnimatePresence mode="wait">
               <motion.div
-                key={active}
+                key={current._id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -70,37 +61,44 @@ export default function Testimonials() {
                 <span className="font-serif text-gold text-6xl leading-none mb-4 opacity-30 select-none">
                   &ldquo;
                 </span>
-                <blockquote className="font-serif text-charcoal text-xl sm:text-2xl leading-relaxed text-center mb-8" style={{ fontStyle: "normal" }}>
-                  {testimonials[active].quote}
+                <blockquote
+                  className="font-serif text-charcoal text-xl sm:text-2xl leading-relaxed text-center mb-8"
+                  style={{ fontStyle: "normal" }}
+                >
+                  {current.quote}
                 </blockquote>
                 <div className="flex flex-col items-center gap-1">
                   <p className="font-sans font-semibold text-sm text-charcoal">
-                    {testimonials[active].name}
+                    {current.name}
                   </p>
-                  <p className="font-sans text-xs text-charcoal/50">
-                    {testimonials[active].context}
-                  </p>
+                  {current.context && (
+                    <p className="font-sans text-xs text-charcoal/50">
+                      {current.context}
+                    </p>
+                  )}
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-10">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                aria-label={`Go to testimonial ${i + 1}`}
-                aria-current={i === active ? "true" : undefined}
-                className={`transition-all duration-300 ${
-                  i === active
-                    ? "w-6 h-2 bg-gold"
-                    : "w-2 h-2 bg-brand/20 hover:bg-brand/40"
-                } rounded-full`}
-              />
-            ))}
-          </div>
+          {/* Dots — only show if more than one testimonial */}
+          {testimonials.length > 1 && (
+            <div className="flex justify-center gap-2 mt-10">
+              {testimonials.map((t, i) => (
+                <button
+                  key={t._id}
+                  onClick={() => setActive(i)}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                  aria-current={i === active ? "true" : undefined}
+                  className={`transition-all duration-300 ${
+                    i === active
+                      ? "w-6 h-2 bg-gold"
+                      : "w-2 h-2 bg-brand/20 hover:bg-brand/40"
+                  } rounded-full`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

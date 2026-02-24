@@ -2,17 +2,15 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import type { SanityHomeGroup } from "@/sanity/types";
 
-const groups = [
-  { name: "The Brills", schedule: "Monthly · Saturday mornings", type: "All stages of life", href: "/groups/brill" },
-  { name: "The Hullingers & Crists", schedule: "Weekly · Sunday evenings", type: "Mixed group", href: "/groups/hullinger-crist" },
-  { name: "The Haack Group", schedule: "Bi-monthly · Sunday evenings", type: "All welcome", href: "/groups/haack" },
-  { name: "The Kurics", schedule: "Weekly · Tuesday evenings", type: "Mixed group", href: "/groups/kuric" },
-  { name: "The Waanders", schedule: "Weekly · Tuesday evenings", type: "Mixed group", href: "/groups/waanders" },
-  { name: "Habitus", schedule: "Annual summer enrollment", type: "Community formation", href: "/groups/habitus" },
-];
+interface Props {
+  groups: SanityHomeGroup[];
+}
 
-export default function HomeGroups() {
+export default function HomeGroups({ groups }: Props) {
+  if (groups.length === 0) return null;
+
   return (
     <section className="py-24 bg-harbor">
       <div className="container-hope">
@@ -39,7 +37,7 @@ export default function HomeGroups() {
               table, not just in the main gathering.
             </p>
             <p className="font-sans text-charcoal/70 leading-relaxed mb-10 max-w-md">
-              Six groups meet throughout the week across Columbus. Each one is
+              Groups meet throughout the week across Columbus. Each one is
               different — different leaders, different rhythms, different mixes of
               people. All of them are trying to do the same thing: seek the truth
               and grace of Jesus together.
@@ -51,38 +49,47 @@ export default function HomeGroups() {
 
           {/* Right: group list */}
           <div className="space-y-3">
-            {groups.map((group, i) => (
-              <motion.div
-                key={group.name}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.07 }}
-              >
-                <Link
-                  href={group.href}
-                  className="group flex items-center justify-between p-5 border border-stone hover:border-brand transition-colors duration-200"
+            {groups.map((group, i) => {
+              const href = group.slug ? `/groups/${group.slug}` : "/groups";
+              return (
+                <motion.div
+                  key={group._id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.07 }}
                 >
-                  <div>
-                    <p className="font-serif text-charcoal text-lg group-hover:text-brand transition-colors duration-200">
-                      {group.name}
-                    </p>
-                    <p className="font-sans text-sm text-charcoal/50 mt-0.5">
-                      {group.schedule} · <span className="text-charcoal/40">{group.type}</span>
-                    </p>
-                  </div>
-                  <svg
-                    className="w-4 h-4 text-charcoal/30 group-hover:text-brand group-hover:translate-x-1 transition-all duration-200"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
+                  <Link
+                    href={href}
+                    className="group flex items-center justify-between p-5 border border-stone hover:border-brand transition-colors duration-200"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </motion.div>
-            ))}
+                    <div>
+                      <p className="font-serif text-charcoal text-lg group-hover:text-brand transition-colors duration-200">
+                        {group.name}
+                      </p>
+                      <p className="font-sans text-sm text-charcoal/50 mt-0.5">
+                        {group.schedule}
+                        {group.type && (
+                          <>
+                            {" · "}
+                            <span className="text-charcoal/40">{group.type}</span>
+                          </>
+                        )}
+                      </p>
+                    </div>
+                    <svg
+                      className="w-4 h-4 text-charcoal/30 group-hover:text-brand group-hover:translate-x-1 transition-all duration-200"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

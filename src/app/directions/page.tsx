@@ -1,5 +1,8 @@
 import ComingSoon from "@/components/ComingSoon";
 import { pageMetadata } from "@/lib/metadata";
+import { sanityFetch } from "@/sanity/client";
+import { pageHeroQuery } from "@/sanity/queries";
+import type { SanityPageHero } from "@/sanity/types";
 
 export const metadata = pageMetadata({
   title: "Directions",
@@ -7,6 +10,7 @@ export const metadata = pageMetadata({
   path: "/directions",
 });
 
-export default function Page() {
-  return <ComingSoon title="Directions" />;
+export default async function Page() {
+  const hero = await sanityFetch<SanityPageHero | null>(pageHeroQuery, { page: "directions" }, null);
+  return <ComingSoon title="Directions" heroImageUrl={hero?.imageUrl ?? null} />;
 }

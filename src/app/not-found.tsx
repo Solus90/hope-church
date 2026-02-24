@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <section className="min-h-[calc(100vh-72px)] flex items-center justify-center bg-brand-dark relative overflow-hidden pt-[72px]">
+    <section className="min-h-[calc(100vh-108px)] flex items-center justify-center bg-brand-dark relative overflow-hidden pt-[108px]">
       {/* Grain overlay */}
       <div className="grain-overlay" aria-hidden="true" />
 

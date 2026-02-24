@@ -39,7 +39,7 @@ export default function Footer() {
               <img
                 src="/logo-reversed.png"
                 alt="Hope Presbyterian Church"
-                style={{ height: '48px', width: 'auto', maxWidth: 'none' }}
+                style={{ height: '96px', width: 'auto', maxWidth: 'none' }}
               />
             </Link>
             <p className="font-sans text-sm text-white/60 leading-relaxed max-w-xs mb-6">

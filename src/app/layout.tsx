@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Text, DM_Sans } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteShell from "@/components/SiteShell";
 import MotionProvider from "@/components/MotionProvider";
 
 const dmSerif = DM_Serif_Text({
@@ -100,9 +99,7 @@ export default function RootLayout({
           >
             Skip to main content
           </a>
-          <Navbar />
-          <main id="main-content" tabIndex={-1}>{children}</main>
-          <Footer />
+          <SiteShell>{children}</SiteShell>
         </MotionProvider>
       </body>
     </html>

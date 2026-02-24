@@ -3,20 +3,23 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default function Hero() {
+interface Props {
+  heroImageUrl?: string | null;
+}
+
+export default function Hero({ heroImageUrl }: Props) {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-brand">
-      {/* Background image with overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1438232992991-995b671fc8c6?w=1800&q=80')",
-        }}
-        aria-hidden="true"
-      />
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-brand/70" aria-hidden="true" />
+      {/* Background image — only rendered when an image is set in Sanity */}
+      {heroImageUrl && (
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url('${heroImageUrl}')` }}
+          aria-hidden="true"
+        />
+      )}
+      {/* Brand-blue overlay — always present; doubles as solid bg when no image */}
+      <div className="absolute inset-0 bg-brand/75" aria-hidden="true" />
       {/* Deep Harbor gradient at bottom */}
       <div
         className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
@@ -29,7 +32,7 @@ export default function Hero() {
       {/* Grain overlay */}
       <div className="grain-overlay" aria-hidden="true" />
 
-      <div className="container-hope relative z-10 pt-[72px]">
+      <div className="container-hope relative z-10 pt-[108px]">
         <div className="max-w-[720px]">
           {/* Eyebrow */}
           <motion.p
@@ -90,15 +93,19 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="mt-16 flex flex-wrap gap-x-10 gap-y-3"
           >
-            {[
-              { icon: "🕙", text: "Sundays at 10:00 AM" },
-              { icon: "📍", text: "2201 Fred Taylor Dr, Columbus" },
-            ].map(({ icon, text }) => (
-              <p key={text} className="font-sans text-sm text-white/60 flex items-center gap-2">
-                <span>{icon}</span>
-                {text}
-              </p>
-            ))}
+              <p className="font-sans text-sm text-white/60 flex items-center gap-2">
+              <span>🕙</span>
+              Sundays at 10:00 AM
+            </p>
+            <a
+              href="https://maps.google.com/?q=2201+Fred+Taylor+Dr,+Columbus,+OH"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-sm text-white/60 flex items-center gap-2 hover:text-white transition-colors duration-200"
+            >
+              <span>📍</span>
+              2201 Fred Taylor Dr, Columbus
+            </a>
           </motion.div>
         </div>
       </div>

@@ -5,6 +5,7 @@ const nextConfig = {
     remotePatterns: [
       { hostname: "www.hopechurchcolumbus.org" },
       { hostname: "images.unsplash.com" },
+      { hostname: "cdn.sanity.io" },
     ],
   },
 };
